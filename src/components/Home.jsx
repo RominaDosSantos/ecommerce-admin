@@ -1,11 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleRight, faChartArea, faChartBar, faTable } from "@fortawesome/free-solid-svg-icons";
-import { DataTableAdmin } from "./DataTableAdmin";
+import {
+  faAngleRight,
+  faChartArea,
+  faChartBar,
+  faTable,
+} from "@fortawesome/free-solid-svg-icons";
+import { DataTable } from "./DataTable";
 import { PaginationAdmin } from "./PaginationAdmin";
 
-export const IndexAdmin = () => {
+export const Home = () => {
   return (
     <>
       <div id="layoutSidenav">
@@ -78,7 +83,11 @@ export const IndexAdmin = () => {
                       Area Chart Example
                     </div>
                     <div className="card-body">
-                      <canvas id="myAreaChart" width="100%" height="40"></canvas>
+                      <canvas
+                        id="myAreaChart"
+                        width="100%"
+                        height="40"
+                      ></canvas>
                     </div>
                   </div>
                 </div>
@@ -100,7 +109,7 @@ export const IndexAdmin = () => {
                   DataTable Example
                 </div>
                 <div className="card-body">
-                  <DataTableAdmin />
+                  <DataTable />
                   <div className="d-flex justify-content-end">
                     <PaginationAdmin />
                   </div>
@@ -111,7 +120,9 @@ export const IndexAdmin = () => {
           <footer className="py-4 bg-light mt-auto">
             <div className="container-fluid px-4">
               <div className="d-flex align-items-center justify-content-between small">
-                <div className="text-muted">Copyright &copy; Your Website 2022</div>
+                <div className="text-muted">
+                  Copyright &copy; Your Website 2022
+                </div>
                 <div>
                   <a href="#">Privacy Policy</a>
                   &middot;

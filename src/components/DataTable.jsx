@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 
-export const DataTableAdmin = () => {
+export const DataTable = () => {
   return (
     <Table striped bordered id="datatablesSimple">
       <thead>
