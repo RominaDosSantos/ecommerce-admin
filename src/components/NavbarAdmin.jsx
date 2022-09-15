@@ -16,8 +16,8 @@ export const NavbarAdmin = () => {
 
   return (
     <>
-      <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <Link class="navbar-brand ps-3" to="">
+      <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <Link className="navbar-brand ps-3" to="">
           HackShop
         </Link>
         <div
@@ -33,7 +33,7 @@ export const NavbarAdmin = () => {
             id="btnProfileIcon"
             onClick={handleClick}
           >
-            <i class="fas fa-user fa-fw"></i>
+            <i className="fas fa-user fa-fw"></i>
           </Button>
           <Overlay
             show={show}
@@ -51,38 +51,38 @@ export const NavbarAdmin = () => {
       <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
           <nav
-            class="sb-sidenav accordion sb-sidenav-dark"
+            className="sb-sidenav accordion sb-sidenav-dark"
             id="sidenavAccordion"
             style={{
               height: "94vh",
             }}
           >
-            <div class="sb-sidenav-menu">
-              <div class="nav">
-                <div class="sb-sidenav-menu-heading">Core</div>
-                <a class="nav-link" href="index.html">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-tachometer-alt"></i>
+            <div className="sb-sidenav-menu">
+              <div className="nav">
+                <div className="sb-sidenav-menu-heading">Core</div>
+                <a className="nav-link" href="index.html">
+                  <div className="sb-nav-link-icon">
+                    <i className="fas fa-tachometer-alt"></i>
                   </div>
                   Dashboard
                 </a>
-                <div class="sb-sidenav-menu-heading">Addons</div>
-                <a class="nav-link" href="charts.html">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-chart-area"></i>
+                <div className="sb-sidenav-menu-heading">Addons</div>
+                <a className="nav-link" href="charts.html">
+                  <div className="sb-nav-link-icon">
+                    <i className="fas fa-chart-area"></i>
                   </div>
                   Charts
                 </a>
-                <a class="nav-link" href="tables.html">
-                  <div class="sb-nav-link-icon">
-                    <i class="fas fa-table"></i>
+                <a className="nav-link" href="tables.html">
+                  <div className="sb-nav-link-icon">
+                    <i className="fas fa-table"></i>
                   </div>
                   Tables
                 </a>
               </div>
             </div>
-            <div class="sb-sidenav-footer">
-              <div class="small">Logged in as:</div>
+            <div className="sb-sidenav-footer">
+              <div className="small">Logged in as:</div>
               Start Bootstrap
             </div>
           </nav>

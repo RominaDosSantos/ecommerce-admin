@@ -3,18 +3,20 @@ export const Login = () => {
     <div id="layoutAuthentication">
       <div id="layoutAuthentication_content">
         <main>
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-lg-5">
-                <div class="card shadow-lg border-0 rounded-lg mt-5">
-                  <div class="card-header">
-                    <h3 class="text-center font-weight-light my-4">Login</h3>
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="col-lg-5">
+                <div className="card shadow-lg border-0 rounded-lg mt-5">
+                  <div className="card-header">
+                    <h3 className="text-center font-weight-light my-4">
+                      Login
+                    </h3>
                   </div>
-                  <div class="card-body">
+                  <div className="card-body">
                     <form>
-                      <div class="form-floating mb-3">
+                      <div className="form-floating mb-3">
                         <input
-                          class="form-control"
+                          className="form-control"
                           id="inputEmail"
                           type="email"
                           placeholder="name@example.com"
@@ -22,9 +24,9 @@ export const Login = () => {
                         />
                         <label forHtml="inputEmail">Email address</label>
                       </div>
-                      <div class="form-floating mb-3">
+                      <div className="form-floating mb-3">
                         <input
-                          class="form-control"
+                          className="form-control"
                           id="inputPassword"
                           type="password"
                           placeholder="Password"
@@ -32,14 +34,17 @@ export const Login = () => {
                         />
                         <label forHtml="inputPassword">Password</label>
                       </div>
-                      <div class="form-check mb-3">
+                      <div className="form-check mb-3">
                         <input
-                          class="form-check-input"
+                          className="form-check-input"
                           id="inputRememberPassword"
                           type="checkbox"
                           value=""
                         />
-                        <label class="form-check-label" forHtml="inputRememberPassword">
+                        <label
+                          className="form-check-label"
+                          forHtml="inputRememberPassword"
+                        >
                           Remember Password
                         </label>
                       </div>

@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import Overlay from "react-bootstrap/Overlay";
 import Popover from "react-bootstrap/Popover";
 import Button from "react-bootstrap/Button";
-import { faUser, fas } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const TopNavbar = () => {
@@ -19,8 +19,8 @@ export const TopNavbar = () => {
 
   return (
     <div className="col-12">
-      <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <Link class="navbar-brand ps-3" to="">
+      <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <Link className="navbar-brand ps-3" to="">
           HackShop
         </Link>
         <div
