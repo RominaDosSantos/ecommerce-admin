@@ -20,7 +20,14 @@ export const NavbarAdmin = () => {
         <Link class="navbar-brand ps-3" to="">
           HackShop
         </Link>
-        <div ref={ref} style={{ width: "100%", textAlign: "-webkit-right" }}>
+        <div
+          ref={ref}
+          style={{
+            width: "100%",
+            textAlign: "-webkit-right",
+            paddingRight: "20px",
+          }}
+        >
           <Button
             className="btn btn-link dropdown-toggle ht-btn p-0"
             id="btnProfileIcon"
@@ -46,6 +53,9 @@ export const NavbarAdmin = () => {
           <nav
             class="sb-sidenav accordion sb-sidenav-dark"
             id="sidenavAccordion"
+            style={{
+              height: "94vh",
+            }}
           >
             <div class="sb-sidenav-menu">
               <div class="nav">

@@ -7,11 +7,13 @@ import "./components/css/styles.css";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { TopNavbar } from "./components/TopNavbar";
+import { SideNavbar } from "./components/SideNavbar";
 
 function App() {
   return (
-    <div className="App">
-      <NavbarAdmin />
+    <div className="App ">
+      <TopNavbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
