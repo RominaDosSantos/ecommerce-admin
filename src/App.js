@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import { TopNavbar } from "./components/TopNavbar";
 import { SideNavbar } from "./components/SideNavbar";
 import { ProductDetail } from "./components/ProductDetail";
+import { CreateProduct } from "./components/CreateProduct";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/create" element={<CreateProduct />} />
         <Route path="/product/:slug" element={<ProductDetail />} />
       </Routes>
       <Footer />
