@@ -8,13 +8,13 @@ import axios from "axios";
 
 export const ProductDetail = () => {
   const [product, setProduct] = useState([]);
-  const { id } = useParams();
+  const { slug } = useParams();
 
   useEffect(() => {
     const getProduct = async () => {
       const result = await axios({
         method: "GET",
-        url: `${process.env.REACT_APP_DB_HOST}/product/${id}`,
+        url: `${process.env.REACT_APP_DB_HOST}/product/${slug}`,
       });
       console.log(result.data);
       setProduct(result.data);
@@ -80,7 +80,6 @@ export const ProductDetail = () => {
           <div className="col-5">
             {product.image &&
               product.image.map((img, index) => {
-                console.log(img);
                 return (
                   <Form.Group className="mb-3" key={index}>
                     <Form.Label>{`Imágen ${index + 1}`}</Form.Label>

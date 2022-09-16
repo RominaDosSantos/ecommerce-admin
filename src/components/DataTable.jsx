@@ -16,7 +16,6 @@ export const DataTable = () => {
         url: `${process.env.REACT_APP_DB_HOST}/products`,
       });
       setProducts(result.data);
-      console.log(result.data);
     };
     getProducts();
   }, []);
@@ -49,7 +48,7 @@ export const DataTable = () => {
                 <td>{product.stock}</td>
                 <td className="d-flex">
                   <Link
-                    to={`/product/${product.id}`}
+                    to={`/product/${product.slug}`}
                     className="btn btn-primary"
                   >
                     <FontAwesomeIcon icon={faPenToSquare} />
