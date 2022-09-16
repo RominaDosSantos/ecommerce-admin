@@ -9,6 +9,17 @@ import axios from "axios";
 export const ProductDetail = () => {
   const [product, setProduct] = useState([]);
   const { slug } = useParams();
+  const [productName, setProductName] = useState(product.id);
+  const [description, setDescription] = useState(product.description);
+  const [category, setCategory] = useState(product.category);
+  const [price, setPrice] = useState(product.price);
+  const [stock, setStock] = useState(product.stock);
+  const [featured, setFeatured] = useState(product.featured);
+  const [image1, setImage1] = useState("sddsad");
+  const [image2, setImage2] = useState("asdsa");
+  const [image3, setImage3] = useState("asdsa");
+  const [image4, setImage4] = useState("adsa");
+  const [image5, setImage5] = useState("asdas");
 
   useEffect(() => {
     const getProduct = async () => {
@@ -16,15 +27,34 @@ export const ProductDetail = () => {
         method: "GET",
         url: `${process.env.REACT_APP_DB_HOST}/product/${slug}`,
       });
-      console.log(result.data);
       setProduct(result.data);
     };
     getProduct();
   }, []);
 
+  const editProduct = async () => {
+    const response = await axios({
+      method: "PUT",
+      url: `${process.env.REACT_APP_DB_HOST}/admin/${product.id}`,
+      data: {
+        productName: productName,
+        description: description,
+        category: category,
+        price: price,
+        stock: stock,
+        featured: featured,
+        image: [image1, image2, image3, image4, image5],
+      },
+    });
+    return response;
+  };
+
   return (
     <div className="d-flex justify-content-center align-items-center">
-      <Form className="my-5 border rounded p-5 col-8">
+      <Form
+        className="my-5 border rounded p-5 col-8"
+        onSubmit={(e) => e.preventDefault()}
+      >
         <div className="d-flex justify-content-between">
           <div className="col-5">
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -33,6 +63,7 @@ export const ProductDetail = () => {
                 type="text"
                 placeholder="Product name"
                 defaultValue={product.productName}
+                onChange={(e) => setProductName(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -41,6 +72,7 @@ export const ProductDetail = () => {
                 type="text"
                 placeholder="Descripción"
                 defaultValue={product.description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -49,6 +81,7 @@ export const ProductDetail = () => {
                 type="number"
                 placeholder="Category id"
                 defaultValue={product.categoryId}
+                onChange={(e) => setCategory(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -57,6 +90,7 @@ export const ProductDetail = () => {
                 type="number"
                 placeholder="Precio"
                 defaultValue={product.price}
+                onChange={(e) => setPrice(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -65,6 +99,7 @@ export const ProductDetail = () => {
                 type="number"
                 placeholder="Stock"
                 defaultValue={product.stock}
+                onChange={(e) => setStock(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -73,6 +108,7 @@ export const ProductDetail = () => {
                 type="boolean"
                 placeholder="Featured"
                 defaultValue={product.featured}
+                onChange={(e) => setFeatured(e.target.value)}
               />
             </Form.Group>
           </div>
@@ -93,7 +129,7 @@ export const ProductDetail = () => {
               })}
           </div>
         </div>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={() => editProduct()}>
           Submit
         </Button>
       </Form>

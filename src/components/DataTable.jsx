@@ -8,6 +8,7 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export const DataTable = () => {
   const [products, setProducts] = useState([]);
+  const [refresh, setRefresh] = useState(true);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -18,12 +19,23 @@ export const DataTable = () => {
       setProducts(result.data);
     };
     getProducts();
-  }, []);
+  }, [refresh]);
+
+  const deleteProduct = async (id) => {
+    const response = await axios({
+      method: "DELETE",
+      url: `${process.env.REACT_APP_DB_HOST}/admin/${id}`,
+    });
+    setRefresh(!refresh);
+    return response;
+  };
 
   return (
     <>
       <div className="d-flex justify-content-end mb-3">
-        <button className="btn btn-success">Agregar</button>
+        <Link to="/create" className="btn btn-success">
+          Agregar
+        </Link>
       </div>
 
       <Table striped bordered id="datatablesSimple">
@@ -53,7 +65,11 @@ export const DataTable = () => {
                   >
                     <FontAwesomeIcon icon={faPenToSquare} />
                   </Link>
-                  <Link to="#" className="btn btn-danger">
+                  <Link
+                    to="#"
+                    className="btn btn-danger"
+                    onClick={() => deleteProduct(product.id)}
+                  >
                     <FontAwesomeIcon icon={faTrash} />
                   </Link>
                 </td>
