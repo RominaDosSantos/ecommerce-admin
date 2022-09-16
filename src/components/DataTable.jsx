@@ -12,7 +12,7 @@ export const DataTable = () => {
   useEffect(() => {
     const getProducts = async () => {
       const result = await axios({
-        method: "GET",
+        method: "get",
         url: `${process.env.REACT_APP_DB_HOST}/products`,
       });
       setProducts(result.data);
