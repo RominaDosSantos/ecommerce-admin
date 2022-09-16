@@ -16,7 +16,6 @@ export const ProductDetail = () => {
         method: "GET",
         url: `${process.env.REACT_APP_DB_HOST}/product/${id}`,
       });
-      console.log(result.data);
       setProduct(result.data);
     };
     getProduct();
