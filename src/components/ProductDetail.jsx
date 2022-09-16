@@ -80,7 +80,6 @@ export const ProductDetail = () => {
           <div className="col-5">
             {product.image &&
               product.image.map((img, index) => {
-                console.log(img);
                 return (
                   <Form.Group className="mb-3" key={index}>
                     <Form.Label>{`Imágen ${index + 1}`}</Form.Label>
