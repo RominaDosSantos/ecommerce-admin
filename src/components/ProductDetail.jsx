@@ -15,11 +15,12 @@ export const ProductDetail = () => {
   const [price, setPrice] = useState(product.price);
   const [stock, setStock] = useState(product.stock);
   const [featured, setFeatured] = useState(product.featured);
-  const [image1, setImage1] = useState("sddsad");
-  const [image2, setImage2] = useState("asdsa");
-  const [image3, setImage3] = useState("asdsa");
-  const [image4, setImage4] = useState("adsa");
-  const [image5, setImage5] = useState("asdas");
+  const [imageOne, setImageOne] = useState("");
+  const [imageTwo, setImageTwo] = useState("");
+  const [imageThree, setImageThree] = useState("");
+  const [imageDetailOne, setImageDetailOne] = useState("");
+  const [imageDetailTwo, setImageDetailTwo] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -31,6 +32,7 @@ export const ProductDetail = () => {
     };
     getProduct();
   }, []);
+  console.log(product);
 
   const editProduct = async () => {
     const response = await axios({
@@ -43,11 +45,121 @@ export const ProductDetail = () => {
         price: price,
         stock: stock,
         featured: featured,
-        image: [image1, image2, image3, image4, image5],
+        image: [
+          { imageOne },
+          { imageTwo },
+          { imageThree },
+          { imageDetailOne },
+          { imageDetailTwo },
+        ],
       },
     });
     return response;
   };
+
+  const upLoadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ecommerce");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImageOne(file.secure_url);
+    setLoading(false);
+  };
+
+  const upLoadImage2 = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ecommerce");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImageTwo(file.secure_url);
+    setLoading(false);
+  };
+
+  const upLoadImage3 = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ecommerce");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImageThree(file.secure_url);
+
+    setLoading(false);
+  };
+
+  const upLoadImage4 = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ecommerce");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImageDetailOne(file.secure_url);
+
+    setLoading(false);
+  };
+  const upLoadImage5 = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ecommerce");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImageDetailTwo(file.secure_url);
+    setLoading(false);
+  };
+
+  function deleteImagen(index) {
+    setImageOne("");
+    setProduct({
+      ...product,
+      image: product.image.map((el, i) => {
+        if (i === index) {
+          return undefined;
+        }
+        return el;
+      }),
+    });
+  }
 
   return (
     <div className="d-flex justify-content-center align-items-center">
@@ -114,19 +226,96 @@ export const ProductDetail = () => {
           </div>
 
           <div className="col-5">
-            {product.image &&
-              product.image.map((img, index) => {
-                return (
-                  <Form.Group className="mb-3" key={index}>
-                    <Form.Label>{`Imágen ${index + 1}`}</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Imágenes"
-                      defaultValue={Object.values(product.image[index])}
+            {product?.image ? (
+              <>
+                <Form.Group className="mb-3">
+                  <Form.Label>Image 1</Form.Label>
+                  <Form.Control
+                    type="file"
+                    placeholder="Imágenes"
+                    onChange={upLoadImage}
+                  />
+                  {loading ? (
+                    <div className="loading">Loading&#8230;</div>
+                  ) : (
+                    <img
+                      className="imgCloudinary"
+                      src={imageOne ? imageOne : product.image[0]?.imageOne}
                     />
-                  </Form.Group>
-                );
-              })}
+                  )}
+                  <button
+                    className="btn btn-outline-danger btn-sm"
+                    onClick={() => deleteImagen(0)}
+                  >
+                    x
+                  </button>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Image 2</Form.Label>
+                  <Form.Control
+                    type="file"
+                    placeholder="Imágenes"
+                    onChange={upLoadImage2}
+                  />
+                  {loading ? (
+                    <div className="loading">Loading&#8230;</div>
+                  ) : (
+                    <img
+                      className="imgCloudinary"
+                      src={product.image[1].imageTwo}
+                    />
+                  )}
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Image 3</Form.Label>
+                  <Form.Control
+                    type="file"
+                    placeholder="Imágenes"
+                    onChange={upLoadImage3}
+                  />
+                  {loading ? (
+                    <div className="loading">Loading&#8230;</div>
+                  ) : (
+                    <img
+                      className="imgCloudinary"
+                      src={product.image[2].imageThree}
+                    />
+                  )}
+                </Form.Group>
+                <Form.Label>Image 4</Form.Label>
+                <Form.Control
+                  type="file"
+                  placeholder="Imágenes"
+                  onChange={upLoadImage4}
+                />
+                {loading ? (
+                  <div className="loading">Loading&#8230;</div>
+                ) : (
+                  <img
+                    className="imgCloudinary"
+                    src={product.image[3].imageDetailOne}
+                  />
+                )}
+                <Form.Group className="mb-3">
+                  <Form.Label>Image 5</Form.Label>
+                  <Form.Control
+                    type="file"
+                    placeholder="Imágenes"
+                    onChange={upLoadImage5}
+                  />
+                  {loading ? (
+                    <div className="loading">Loading&#8230;</div>
+                  ) : (
+                    <img
+                      className="imgCloudinary"
+                      src={product.image[4].imageDetailTwo}
+                    />
+                  )}
+                </Form.Group>
+              </>
+            ) : (
+              <h1>Cargando...</h1>
+            )}
           </div>
         </div>
         <Button variant="primary" type="submit" onClick={() => editProduct()}>
