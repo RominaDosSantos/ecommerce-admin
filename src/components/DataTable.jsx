@@ -30,6 +30,7 @@ export const DataTable = () => {
     const response = await axios({
       method: "DELETE",
       url: `${process.env.REACT_APP_DB_HOST}/admin/${id}`,
+      headers: { Authorization: `Bearer ${admin.token}` },
     });
     setRefresh(!refresh);
     return response;
