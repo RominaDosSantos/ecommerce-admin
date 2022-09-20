@@ -79,11 +79,15 @@ export const Login = () => {
                         >
                           Remember Password
                         </label>
-                        <button type="submit">
-                          <Link onClick={() => loginAdmin()}>Entrar</Link>
-                        </button>
                       </div>
-                      <button className="btn btn-primary">Login</button>
+                      <button type="submit" className="btn btn-primary">
+                        <Link
+                          onClick={() => loginAdmin()}
+                          className="submitUpdate"
+                        >
+                          Entrar
+                        </Link>
+                      </button>
                     </form>
                   </div>
                 </div>

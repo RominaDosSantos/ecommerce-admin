@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export const CreateProduct = () => {
   const [productName, setProductName] = useState("");
@@ -263,7 +264,10 @@ export const CreateProduct = () => {
           </div>
         </div>
         <Button variant="primary" type="submit" onClick={() => createProduct()}>
-          Agregar
+          <Link to="/admin" className="submitUpdate">
+            {" "}
+            add product
+          </Link>
         </Button>
       </Form>
     </div>
