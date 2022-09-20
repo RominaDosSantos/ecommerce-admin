@@ -6,10 +6,13 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export const DataTable = () => {
   const [products, setProducts] = useState([]);
   const [refresh, setRefresh] = useState(true);
+  const MySwal = withReactContent(Swal);
 
   const admin = useSelector((state) => state.login.token);
 
@@ -27,6 +30,7 @@ export const DataTable = () => {
   }, [refresh]);
 
   const deleteProduct = async (id) => {
+    await alertDelete();
     const response = await axios({
       method: "DELETE",
       url: `${process.env.REACT_APP_DB_HOST}/admin/${id}`,
@@ -36,6 +40,42 @@ export const DataTable = () => {
     return response;
   };
 
+  async function alertDelete(id) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          deleteProduct(id);
+          swalWithBootstrapButtons.fire(
+            "Deleted!",
+            "Your file has been deleted.",
+            "success"
+          );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            "Cancelled",
+            "Your imaginary file is safe :)",
+            "error"
+          );
+        }
+      });
+  }
   return (
     <>
       <div className="d-flex justify-content-end mb-3">
@@ -74,7 +114,9 @@ export const DataTable = () => {
                   <Link
                     to="#"
                     className="btn btn-danger"
-                    onClick={() => deleteProduct(product.id)}
+                    onClick={() => {
+                      alertDelete(product.id);
+                    }}
                   >
                     <FontAwesomeIcon icon={faTrash} />
                   </Link>
