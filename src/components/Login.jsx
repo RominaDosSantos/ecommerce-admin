@@ -83,6 +83,7 @@ export const Login = () => {
                           <Link onClick={() => loginAdmin()}>Entrar</Link>
                         </button>
                       </div>
+                      <button className="btn btn-primary">Login</button>
                     </form>
                   </div>
                 </div>
