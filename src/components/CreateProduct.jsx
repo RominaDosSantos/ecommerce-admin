@@ -11,21 +11,12 @@ export const CreateProduct = () => {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [featured, setFeatured] = useState("");
-  const [image1, setImage1] = useState(
-    "https://www.tusplantasonline.com/img/galeria/570/platycerum-cuerno-alce_(2).JPG"
-  );
-  const [image2, setImage2] = useState(
-    "https://www.tusplantasonline.com/img/galeria/570/platycerum-cuerno-alce_(2).JPG"
-  );
-  const [image3, setImage3] = useState(
-    "https://www.tusplantasonline.com/img/galeria/570/platycerum-cuerno-alce_(2).JPG"
-  );
-  const [image4, setImage4] = useState(
-    "https://www.tusplantasonline.com/img/galeria/570/platycerum-cuerno-alce_(2).JPG"
-  );
-  const [image5, setImage5] = useState(
-    "https://www.tusplantasonline.com/img/galeria/570/platycerum-cuerno-alce_(2).JPG"
-  );
+  const [image1, setImage1] = useState("");
+  const [image2, setImage2] = useState("");
+  const [image3, setImage3] = useState("");
+  const [image4, setImage4] = useState("");
+  const [image5, setImage5] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const createProduct = async () => {
     const response = await axios({
@@ -44,6 +35,103 @@ export const CreateProduct = () => {
     return response;
   };
 
+  const upLoadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ecommerce");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage1(file.secure_url);
+    console.log(file.secure_url);
+
+    setLoading(false);
+  };
+
+  const upLoadImage2 = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ecommerce");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage2(file.secure_url);
+
+    setLoading(false);
+  };
+
+  const upLoadImage3 = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ecommerce");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage3(file.secure_url);
+
+    setLoading(false);
+  };
+
+  const upLoadImage4 = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ecommerce");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage4(file.secure_url);
+
+    setLoading(false);
+  };
+  const upLoadImage5 = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "ecommerce");
+    setLoading(true);
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    setImage5(file.secure_url);
+    setLoading(false);
+  };
+
+  function deleteImagenUno() {
+    setImage1("");
+  }
   return (
     <div className="d-flex justify-content-center align-items-center">
       <Form
@@ -106,42 +194,67 @@ export const CreateProduct = () => {
             <Form.Group className="mb-3">
               <Form.Label>Imágen 1</Form.Label>
               <Form.Control
-                // onChange={(e) => setImage1(e.target.value)}
+                onChange={upLoadImage}
                 type="file"
                 placeholder="Imágenes"
               />
+              {loading ? (
+                <div className="loading">Loading&#8230;</div>
+              ) : (
+                <img className="imgCloudinary" src={image1} />
+              )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Imágen 2</Form.Label>
               <Form.Control
-                // onChange={(e) => setImage2(e.target.value)}
+                onChange={upLoadImage2}
                 type="file"
                 placeholder="Imágenes"
               />
+              {loading ? (
+                <div className="loading">Loading&#8230;</div>
+              ) : (
+                <img className="imgCloudinary" src={image2} />
+              )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Imágen 3</Form.Label>
               <Form.Control
-                // onChange={(e) => setImage3(e.target.value)}
+                onChange={upLoadImage3}
                 type="file"
                 placeholder="Imágenes"
               />
+              {loading ? (
+                <div className="loading">Loading&#8230;</div>
+              ) : (
+                <img className="imgCloudinary" src={image3} />
+              )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Imágen 4</Form.Label>
               <Form.Control
-                // onChange={(e) => setImage4(e.target.value)}
+                onChange={upLoadImage4}
                 type="file"
                 placeholder="Imágenes"
               />
+              {loading ? (
+                <div className="loading">Loading&#8230;</div>
+              ) : (
+                <img className="imgCloudinary" src={image4} />
+              )}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Imágen 5</Form.Label>
               <Form.Control
-                // onChange={(e) => setImage5(e.target.value)}
+                onChange={upLoadImage5}
                 type="file"
                 placeholder="Imágenes"
               />
+              {loading ? (
+                <div className="loading">Loading&#8230;</div>
+              ) : (
+                <img className="imgCloudinary" src={image5} />
+              )}
             </Form.Group>
           </div>
         </div>

@@ -1,4 +1,32 @@
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import axios from "axios";
+import { login } from "../redux/config/slices/loginSlice";
+import { useDispatch, useSelector } from "react-redux";
 export const Login = () => {
+  const [email, setEmail] = useState("admin@admin.com");
+  const [password, setPassword] = useState("123");
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  async function loginAdmin() {
+    const response = await axios({
+      method: "post",
+      url: `${process.env.REACT_APP_DB_HOST}/login`,
+      data: {
+        email,
+        password,
+      },
+    });
+    dispatch(
+      login({
+        token: response.data.token,
+      })
+    );
+    navigate("/admin");
+  }
+
   return (
     <div id="layoutAuthentication">
       <div id="layoutAuthentication_content">
@@ -21,6 +49,8 @@ export const Login = () => {
                           type="email"
                           placeholder="name@example.com"
                           name="email"
+                          defaultValue={email}
+                          onChange={(e) => setEmail(e.target.value)}
                         />
                         <label forHtml="inputEmail">Email address</label>
                       </div>
@@ -31,6 +61,8 @@ export const Login = () => {
                           type="password"
                           placeholder="Password"
                           name="password"
+                          defaultValue={password}
+                          onChange={(e) => setPassword(e.target.value)}
                         />
                         <label forHtml="inputPassword">Password</label>
                       </div>
@@ -47,7 +79,11 @@ export const Login = () => {
                         >
                           Remember Password
                         </label>
+                        <button type="submit">
+                          <Link onClick={() => loginAdmin()}>Entrar</Link>
+                        </button>
                       </div>
+                      <button className="btn btn-primary">Login</button>
                     </form>
                   </div>
                 </div>
