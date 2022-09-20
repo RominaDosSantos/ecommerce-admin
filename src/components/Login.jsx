@@ -41,7 +41,7 @@ export const Login = () => {
                     </h3>
                   </div>
                   <div className="card-body">
-                    <form>
+                    <form onSubmit={(e) => e.preventDefault()}>
                       <div className="form-floating mb-3">
                         <input
                           className="form-control"
