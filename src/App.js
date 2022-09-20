@@ -11,16 +11,19 @@ import { TopNavbar } from "./components/TopNavbar";
 import { SideNavbar } from "./components/SideNavbar";
 import { ProductDetail } from "./components/ProductDetail";
 import { CreateProduct } from "./components/CreateProduct";
+import ProtectedRoute from "./components/PrivateRoutes.jsx";
 
 function App() {
   return (
     <div className="App ">
       <TopNavbar />
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<Home />} />
-        <Route path="/create" element={<CreateProduct />} />
-        <Route path="/product/:slug" element={<ProductDetail />} />
+        <Route path="/" element={<Login />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/admin" element={<Home />} />
+          <Route path="/create" element={<CreateProduct />} />
+          <Route path="/product/:slug" element={<ProductDetail />} />
+        </Route>
       </Routes>
       <Footer />
     </div>

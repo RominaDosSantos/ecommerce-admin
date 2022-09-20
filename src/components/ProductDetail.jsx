@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { Link, useParams } from "react-router-dom";
@@ -323,7 +322,10 @@ export const ProductDetail = () => {
           </div>
         </div>
         <Button variant="primary" type="submit" onClick={() => editProduct()}>
-          Submit
+          <Link to="/admin" className="submitUpdate">
+            {" "}
+            Submit
+          </Link>
         </Button>
       </Form>
     </div>

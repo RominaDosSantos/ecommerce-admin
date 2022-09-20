@@ -12282,3 +12282,7 @@ body {
   width: 200px;
   height: 100px;
 }
+.submitUpdate {
+  color: white;
+  text-decoration: none;
+}
