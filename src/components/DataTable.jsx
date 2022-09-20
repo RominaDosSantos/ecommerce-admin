@@ -5,17 +5,22 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 export const DataTable = () => {
   const [products, setProducts] = useState([]);
   const [refresh, setRefresh] = useState(true);
 
+  const admin = useSelector((state) => state.login.token);
+
   useEffect(() => {
     const getProducts = async () => {
       const result = await axios({
         method: "get",
-        url: `${process.env.REACT_APP_DB_HOST}/products`,
+        url: `${process.env.REACT_APP_DB_HOST}/admin`,
+        headers: { Authorization: `Bearer ${admin.token}` },
       });
+
       setProducts(result.data);
     };
     getProducts();
