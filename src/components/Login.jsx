@@ -48,6 +48,7 @@ export const Login = () => {
                           Remember Password
                         </label>
                       </div>
+                      <button className="btn btn-primary">Login</button>
                     </form>
                   </div>
                 </div>
