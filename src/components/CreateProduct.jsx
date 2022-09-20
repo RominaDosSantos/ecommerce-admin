@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export const CreateProduct = () => {
   const [productName, setProductName] = useState("");
@@ -18,6 +19,8 @@ export const CreateProduct = () => {
   const [image5, setImage5] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const admin = useSelector((state) => state.login.token);
+
   const createProduct = async () => {
     const response = await axios({
       method: "POST",
@@ -31,6 +34,7 @@ export const CreateProduct = () => {
         featured: featured,
         image: [image1, image2, image3, image4, image5],
       },
+      headers: { Authorization: `Bearer ${admin.token}` },
     });
     return response;
   };

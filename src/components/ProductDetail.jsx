@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 export const ProductDetail = () => {
   const [product, setProduct] = useState([]);
@@ -21,6 +22,8 @@ export const ProductDetail = () => {
   const [imageDetailOne, setImageDetailOne] = useState("");
   const [imageDetailTwo, setImageDetailTwo] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const admin = useSelector((state) => state.login.token);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -53,6 +56,7 @@ export const ProductDetail = () => {
           { imageDetailTwo },
         ],
       },
+      headers: { Authorization: `Bearer ${admin.token}` },
     });
     return response;
   };
