@@ -19,7 +19,6 @@ export const Login = () => {
         password,
       },
     });
-    console.log(response.data);
     dispatch(
       login({
         token: response.data.token,
