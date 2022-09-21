@@ -5,6 +5,8 @@ import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export const CreateProduct = () => {
   const [productName, setProductName] = useState("");
@@ -19,8 +21,16 @@ export const CreateProduct = () => {
   const [image4, setImage4] = useState("");
   const [image5, setImage5] = useState("");
   const [loading, setLoading] = useState(false);
-
   const admin = useSelector((state) => state.login.token);
+  const MySwal = withReactContent(Swal);
+
+  function alertCreate() {
+    MySwal.fire({
+      title: <strong>Good job!</strong>,
+      html: <i>The product is created!</i>,
+      icon: "success",
+    });
+  }
 
   const createProduct = async () => {
     const response = await axios({
@@ -163,11 +173,14 @@ export const CreateProduct = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Categoría</Form.Label>
-              <Form.Control
+              <Form.Select
+                aria-label="Default select example"
                 onChange={(e) => setCategory(e.target.value)}
-                type="number"
-                placeholder="Category id"
-              />
+              >
+                <option>Seleccionar una categoria...</option>
+                <option value="1">Interior</option>
+                <option value="2">Exterior</option>
+              </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Precio</Form.Label>
@@ -187,11 +200,14 @@ export const CreateProduct = () => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Featured</Form.Label>
-              <Form.Control
+              <Form.Select
+                aria-label="Default select example"
                 onChange={(e) => setFeatured(e.target.value)}
-                type="boolean"
-                placeholder="Featured"
-              />
+              >
+                <option>Seleccionar...</option>
+                <option value={true}>True</option>
+                <option value={false}>False</option>
+              </Form.Select>
             </Form.Group>
           </div>
 
@@ -263,7 +279,14 @@ export const CreateProduct = () => {
             </Form.Group>
           </div>
         </div>
-        <Button variant="primary" type="submit" onClick={() => createProduct()}>
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={() => {
+            createProduct();
+            alertCreate();
+          }}
+        >
           <Link to="/admin" className="submitUpdate">
             {" "}
             add product

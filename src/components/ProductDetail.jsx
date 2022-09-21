@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 export const ProductDetail = () => {
   const [product, setProduct] = useState([]);
@@ -24,6 +26,15 @@ export const ProductDetail = () => {
 
   const admin = useSelector((state) => state.login.token);
 
+  const MySwal = withReactContent(Swal);
+  function alerUpdate() {
+    MySwal.fire({
+      title: <strong>Good job!</strong>,
+      html: <i>Your product is modified!</i>,
+      icon: "success",
+    });
+  }
+
   useEffect(() => {
     const getProduct = async () => {
       const result = await axios({
@@ -34,7 +45,6 @@ export const ProductDetail = () => {
     };
     getProduct();
   }, []);
-  console.log(product);
 
   const editProduct = async () => {
     const response = await axios({
@@ -321,7 +331,14 @@ export const ProductDetail = () => {
             )}
           </div>
         </div>
-        <Button variant="primary" type="submit" onClick={() => editProduct()}>
+        <Button
+          variant="primary"
+          type="submit"
+          onClick={() => {
+            editProduct();
+            alerUpdate();
+          }}
+        >
           <Link to="/admin" className="submitUpdate">
             {" "}
             Submit
