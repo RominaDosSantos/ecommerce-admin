@@ -107,19 +107,19 @@ export const DataTable = () => {
                 <td className="d-flex">
                   <Link
                     to={`/product/${product.slug}`}
-                    className="btn btn-primary"
+                    className="btn btn-outline-secondary rounded-pill"
                   >
                     <FontAwesomeIcon icon={faPenToSquare} />
                   </Link>
-                  <Link
+                  <button
                     to="#"
-                    className="btn btn-danger"
+                    className="btn btn-outline-secondary ms-1 rounded-pill"
                     onClick={() => {
                       alertDelete(product.id);
                     }}
                   >
                     <FontAwesomeIcon icon={faTrash} />
-                  </Link>
+                  </button>
                 </td>
               </tr>
             );
