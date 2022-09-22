@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
@@ -15,12 +15,8 @@ export const CreateProduct = () => {
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
   const [featured, setFeatured] = useState("");
-  const [image1, setImage1] = useState("");
-  const [image2, setImage2] = useState("");
-  const [image3, setImage3] = useState("");
-  const [image4, setImage4] = useState("");
-  const [image5, setImage5] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [images, setImages] = useState("");
+  const navigate = useNavigate();
   const admin = useSelector((state) => state.login.token);
   const MySwal = withReactContent(Swal);
 
@@ -29,6 +25,15 @@ export const CreateProduct = () => {
       title: <strong>Good job!</strong>,
       html: <i>The product is created!</i>,
       icon: "success",
+    });
+  }
+
+  function inputRequired() {
+    MySwal.fire({
+      title: "Error!",
+      text: "All fields are required.",
+      icon: "error",
+      confirmButtonText: "Cancel",
     });
   }
 
@@ -43,110 +48,17 @@ export const CreateProduct = () => {
         price: price,
         stock: stock,
         featured: featured,
-        image: [image1, image2, image3, image4, image5],
+        image: images,
       },
-      headers: { Authorization: `Bearer ${admin.token}` },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${admin.token}`,
+      },
     });
+    navigate("/admin");
     return response;
   };
 
-  const upLoadImage = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "ecommerce");
-    setLoading(true);
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
-      {
-        method: "POST",
-        body: data,
-      }
-    );
-    const file = await res.json();
-    setImage1(file.secure_url);
-    console.log(file.secure_url);
-
-    setLoading(false);
-  };
-
-  const upLoadImage2 = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "ecommerce");
-    setLoading(true);
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
-      {
-        method: "POST",
-        body: data,
-      }
-    );
-    const file = await res.json();
-    setImage2(file.secure_url);
-
-    setLoading(false);
-  };
-
-  const upLoadImage3 = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "ecommerce");
-    setLoading(true);
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
-      {
-        method: "POST",
-        body: data,
-      }
-    );
-    const file = await res.json();
-    setImage3(file.secure_url);
-
-    setLoading(false);
-  };
-
-  const upLoadImage4 = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "ecommerce");
-    setLoading(true);
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
-      {
-        method: "POST",
-        body: data,
-      }
-    );
-    const file = await res.json();
-    setImage4(file.secure_url);
-
-    setLoading(false);
-  };
-  const upLoadImage5 = async (e) => {
-    const files = e.target.files;
-    const data = new FormData();
-    data.append("file", files[0]);
-    data.append("upload_preset", "ecommerce");
-    setLoading(true);
-    const res = await fetch(
-      "https://api.cloudinary.com/v1_1/mdeluca/image/upload",
-      {
-        method: "POST",
-        body: data,
-      }
-    );
-    const file = await res.json();
-    setImage5(file.secure_url);
-    setLoading(false);
-  };
-
-  function deleteImagenUno() {
-    setImage1("");
-  }
   return (
     <div className="d-flex justify-content-center align-items-center">
       <Form
@@ -161,33 +73,37 @@ export const CreateProduct = () => {
                 onChange={(e) => setProductName(e.target.value)}
                 type="text"
                 placeholder="Product name"
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Descripción</Form.Label>
+              <Form.Label>Description</Form.Label>
               <Form.Control
                 onChange={(e) => setDescription(e.target.value)}
                 type="text"
                 placeholder="Descripción"
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Categoría</Form.Label>
+              <Form.Label>Category</Form.Label>
               <Form.Select
                 aria-label="Default select example"
                 onChange={(e) => setCategory(e.target.value)}
+                required
               >
-                <option>Seleccionar una categoria...</option>
-                <option value="1">Interior</option>
-                <option value="2">Exterior</option>
+                <option>Select a category...</option>
+                <option value="1">Inside</option>
+                <option value="2">Outside</option>
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Precio</Form.Label>
+              <Form.Label>Price</Form.Label>
               <Form.Control
                 onChange={(e) => setPrice(e.target.value)}
                 type="number"
                 placeholder="Precio"
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -196,6 +112,7 @@ export const CreateProduct = () => {
                 onChange={(e) => setStock(e.target.value)}
                 type="number"
                 placeholder="Stock"
+                required
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -203,8 +120,9 @@ export const CreateProduct = () => {
               <Form.Select
                 aria-label="Default select example"
                 onChange={(e) => setFeatured(e.target.value)}
+                required
               >
-                <option>Seleccionar...</option>
+                <option>Select</option>
                 <option value={true}>True</option>
                 <option value={false}>False</option>
               </Form.Select>
@@ -213,69 +131,64 @@ export const CreateProduct = () => {
 
           <div className="col-5">
             <Form.Group className="mb-3">
-              <Form.Label>Imágen 1</Form.Label>
+              <Form.Label>Image 1</Form.Label>
               <Form.Control
-                onChange={upLoadImage}
+                onChange={(e) => {
+                  console.log(e.target.files[0]);
+                  setImages((prev) => [...prev, e.target.files[0]]);
+                }}
                 type="file"
                 placeholder="Imágenes"
+                required
               />
-              {loading ? (
-                <div className="loading">Loading&#8230;</div>
-              ) : (
-                <img className="imgCloudinary" src={image1} />
-              )}
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Imágen 2</Form.Label>
+              <Form.Label>Image 2</Form.Label>
               <Form.Control
-                onChange={upLoadImage2}
+                onChange={(e) => {
+                  console.log(e.target.files[0]);
+                  setImages((prev) => [...prev, e.target.files[0]]);
+                }}
                 type="file"
                 placeholder="Imágenes"
+                required
               />
-              {loading ? (
-                <div className="loading">Loading&#8230;</div>
-              ) : (
-                <img className="imgCloudinary" src={image2} />
-              )}
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Imágen 3</Form.Label>
+              <Form.Label>Image 3</Form.Label>
               <Form.Control
-                onChange={upLoadImage3}
+                onChange={(e) => {
+                  console.log(e.target.files[0]);
+                  setImages((prev) => [...prev, e.target.files[0]]);
+                }}
                 type="file"
                 placeholder="Imágenes"
+                required
               />
-              {loading ? (
-                <div className="loading">Loading&#8230;</div>
-              ) : (
-                <img className="imgCloudinary" src={image3} />
-              )}
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Imágen 4</Form.Label>
+              <Form.Label>Image 4</Form.Label>
               <Form.Control
-                onChange={upLoadImage4}
+                onChange={(e) => {
+                  console.log(e.target.files[0]);
+                  setImages((prev) => [...prev, e.target.files[0]]);
+                }}
                 type="file"
                 placeholder="Imágenes"
+                required
               />
-              {loading ? (
-                <div className="loading">Loading&#8230;</div>
-              ) : (
-                <img className="imgCloudinary" src={image4} />
-              )}
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Imágen 5</Form.Label>
+              <Form.Label>Image 5</Form.Label>
               <Form.Control
-                onChange={upLoadImage5}
+                onChange={(e) => {
+                  console.log(e.target.files[0]);
+                  setImages((prev) => [...prev, e.target.files[0]]);
+                }}
                 type="file"
                 placeholder="Imágenes"
+                required
               />
-              {loading ? (
-                <div className="loading">Loading&#8230;</div>
-              ) : (
-                <img className="imgCloudinary" src={image5} />
-              )}
             </Form.Group>
           </div>
         </div>
@@ -283,14 +196,22 @@ export const CreateProduct = () => {
           variant="primary"
           type="submit"
           onClick={() => {
-            createProduct();
-            alertCreate();
+            if (
+              !productName ||
+              !description ||
+              !category ||
+              !price ||
+              !stock ||
+              !featured
+            ) {
+              inputRequired();
+            } else {
+              createProduct();
+              alertCreate();
+            }
           }}
         >
-          <Link to="/admin" className="submitUpdate">
-            {" "}
-            add product
-          </Link>
+          <button className="submitUpdate">add product</button>
         </Button>
       </Form>
     </div>
