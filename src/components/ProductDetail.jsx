@@ -7,6 +7,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export const ProductDetail = () => {
   const [product, setProduct] = useState([]);
@@ -248,20 +250,26 @@ export const ProductDetail = () => {
                     placeholder="Imágenes"
                     onChange={upLoadImage}
                   />
-                  {loading ? (
-                    <div className="loading">Loading&#8230;</div>
-                  ) : (
-                    <img
-                      className="imgCloudinary"
-                      src={imageOne ? imageOne : product.image[0]?.imageOne}
-                    />
-                  )}
-                  <button
-                    className="btn btn-outline-danger btn-sm"
-                    onClick={() => deleteImagen(0)}
-                  >
-                    x
-                  </button>
+                  <div className="d-flex w-100">
+                    {loading ? (
+                      <div className="loading">Loading&#8230;</div>
+                    ) : (
+                      <div>
+                        <img
+                          className="imgCloudinary"
+                          src={imageOne ? imageOne : product.image[0]?.imageOne}
+                        />
+                      </div>
+                    )}
+                    <div className="d-flex justify-content-center align-items-center w-25">
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => deleteImagen(0)}
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  </div>
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>Image 2</Form.Label>
@@ -270,14 +278,26 @@ export const ProductDetail = () => {
                     placeholder="Imágenes"
                     onChange={upLoadImage2}
                   />
-                  {loading ? (
-                    <div className="loading">Loading&#8230;</div>
-                  ) : (
-                    <img
-                      className="imgCloudinary"
-                      src={product.image[1].imageTwo}
-                    />
-                  )}
+                  <div className="d-flex w-100">
+                    {loading ? (
+                      <div className="loading">Loading&#8230;</div>
+                    ) : (
+                      <div>
+                        <img
+                          className="imgCloudinary"
+                          src={imageOne ? imageOne : product.image[1]?.imageTwo}
+                        />
+                      </div>
+                    )}
+                    <div className="d-flex justify-content-center align-items-center w-25">
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => deleteImagen(1)}
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  </div>
                 </Form.Group>
                 <Form.Group className="mb-3">
                   <Form.Label>Image 3</Form.Label>
@@ -286,14 +306,28 @@ export const ProductDetail = () => {
                     placeholder="Imágenes"
                     onChange={upLoadImage3}
                   />
-                  {loading ? (
-                    <div className="loading">Loading&#8230;</div>
-                  ) : (
-                    <img
-                      className="imgCloudinary"
-                      src={product.image[2].imageThree}
-                    />
-                  )}
+                  <div className="d-flex w-100">
+                    {loading ? (
+                      <div className="loading">Loading&#8230;</div>
+                    ) : (
+                      <div>
+                        <img
+                          className="imgCloudinary"
+                          src={
+                            imageOne ? imageOne : product.image[2].imageThree
+                          }
+                        />
+                      </div>
+                    )}
+                    <div className="d-flex justify-content-center align-items-center w-25">
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => deleteImagen(2)}
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  </div>
                 </Form.Group>
                 <Form.Label>Image 4</Form.Label>
                 <Form.Control
@@ -301,14 +335,28 @@ export const ProductDetail = () => {
                   placeholder="Imágenes"
                   onChange={upLoadImage4}
                 />
-                {loading ? (
-                  <div className="loading">Loading&#8230;</div>
-                ) : (
-                  <img
-                    className="imgCloudinary"
-                    src={product.image[3].imageDetailOne}
-                  />
-                )}
+                <div className="d-flex w-100">
+                  {loading ? (
+                    <div className="loading">Loading&#8230;</div>
+                  ) : (
+                    <div>
+                      <img
+                        className="imgCloudinary"
+                        src={
+                          imageOne ? imageOne : product.image[3].imageDetailOne
+                        }
+                      />
+                    </div>
+                  )}
+                  <div className="d-flex justify-content-center align-items-center w-25">
+                    <button
+                      className="btn btn-outline-danger btn-sm"
+                      onClick={() => deleteImagen(3)}
+                    >
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                </div>
                 <Form.Group className="mb-3">
                   <Form.Label>Image 5</Form.Label>
                   <Form.Control
@@ -316,14 +364,30 @@ export const ProductDetail = () => {
                     placeholder="Imágenes"
                     onChange={upLoadImage5}
                   />
-                  {loading ? (
-                    <div className="loading">Loading&#8230;</div>
-                  ) : (
-                    <img
-                      className="imgCloudinary"
-                      src={product.image[4].imageDetailTwo}
-                    />
-                  )}
+                  <div className="d-flex w-100">
+                    {loading ? (
+                      <div className="loading">Loading&#8230;</div>
+                    ) : (
+                      <div>
+                        <img
+                          className="imgCloudinary"
+                          src={
+                            imageOne
+                              ? imageOne
+                              : product.image[4].imageDetailTwo
+                          }
+                        />
+                      </div>
+                    )}
+                    <div className="d-flex justify-content-center align-items-center w-25">
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => deleteImagen(4)}
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  </div>
                 </Form.Group>
               </>
             ) : (

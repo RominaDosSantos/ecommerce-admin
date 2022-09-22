@@ -53,8 +53,8 @@ export const DataTable = () => {
   async function alertDelete(id) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
-        confirmButton: "btn btn-success",
-        cancelButton: "btn btn-danger",
+        confirmButton: "btn btn-success rounded-pill ms-3",
+        cancelButton: "btn btn-danger rounded-pill",
       },
       buttonsStyling: false,
     });
@@ -62,11 +62,10 @@ export const DataTable = () => {
     swalWithBootstrapButtons
       .fire({
         title: "Are you sure?",
-        text: "You won't be able to revert this!",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!",
+        confirmButtonText: "Delete",
+        cancelButtonText: "Cancel",
         reverseButtons: true,
       })
       .then((result) => {
@@ -80,7 +79,7 @@ export const DataTable = () => {
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           swalWithBootstrapButtons.fire(
             "Cancelled",
-            "Your imaginary file is safe :)",
+            "Your file has not been deleted.",
             "error"
           );
         }
