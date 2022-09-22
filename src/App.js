@@ -12,6 +12,7 @@ import { SideNavbar } from "./components/SideNavbar";
 import { ProductDetail } from "./components/ProductDetail";
 import { CreateProduct } from "./components/CreateProduct";
 import ProtectedRoute from "./components/PrivateRoutes.jsx";
+import { Chart } from "./components/Chart";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/admin" element={<Home />} />
+          <Route path="/chart" element={<Chart />} />
           <Route path="/create" element={<CreateProduct />} />
           <Route path="/product/:slug" element={<ProductDetail />} />
         </Route>

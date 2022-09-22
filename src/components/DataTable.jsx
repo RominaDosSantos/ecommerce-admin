@@ -8,6 +8,7 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Form from "react-bootstrap/Form";
 
 export const DataTable = () => {
   const [products, setProducts] = useState([]);
@@ -87,20 +88,20 @@ export const DataTable = () => {
   }
   return (
     <>
-      <div className="d-flex justify-content-end mb-3">
-        <Link to="/create" className="btn btn-success">
-          Agregar
-        </Link>
-      </div>
-      <div>
-        <label htmlFor="">ORDEN</label>
-        <select name="" id="" onChange={(e) => setTidy(e.target.value)}>
-          <option value="" selected disabled hidden>
-            Select order..
-          </option>
-          <option value="1">ASC</option>
-          <option value="2">DESC</option>
-        </select>
+      <div className="d-flex justify-content-between">
+        <div className="d-flex mb-3">
+          <Link to="/create" className="btn btn-success">
+            Agregar
+          </Link>
+        </div>
+        <div className="">
+          <Form.Group className="mb-3">
+            <Form.Select onChange={(e) => setTidy(e.target.value)}>
+              <option value="2">Desc</option>
+              <option value="1">Asc</option>
+            </Form.Select>
+          </Form.Group>
+        </div>
       </div>
       <Table striped bordered id="datatablesSimple">
         <thead>

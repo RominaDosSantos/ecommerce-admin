@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export const SideNavbar = () => {
   return (
@@ -19,12 +20,12 @@ export const SideNavbar = () => {
                   Dashboard
                 </a>
                 <div className="sb-sidenav-menu-heading">Addons</div>
-                <a className="nav-link" href="charts.html">
+                <Link className="nav-link" to={"/chart"}>
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-chart-area"></i>
                   </div>
                   Charts
-                </a>
+                </Link>
                 <a className="nav-link" href="tables.html">
                   <div className="sb-nav-link-icon">
                     <i className="fas fa-table"></i>

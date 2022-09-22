@@ -22,11 +22,11 @@ export const Home = () => {
             <div id="layoutSidenav_content">
               <main>
                 <div className="container-fluid px-4">
-                  <h1 className="mt-4">Dashboard</h1>
-                  <ol className="breadcrumb mb-4">
+                  <h1 className="my-4">Dashboard</h1>
+                  {/* <ol className="breadcrumb mb-4">
                     <li className="breadcrumb-item active">Dashboard</li>
-                  </ol>
-                  <div className="row">
+                  </ol> */}
+                  {/* <div className="row">
                     <div className="col-xl-3 col-md-6">
                       <div className="card bg-primary text-white mb-4">
                         <div className="card-body">Primary Card</div>
@@ -91,7 +91,7 @@ export const Home = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="row">
                     <div className="col-xl-6">
                       <div className="card mb-4">
@@ -102,12 +102,10 @@ export const Home = () => {
                           />
                           Area Chart Example
                         </div>
-                        <div className="card-body">
-                          <canvas
-                            id="myAreaChart"
-                            width="100%"
-                            height="40"
-                          ></canvas>
+                        <div className="card-body d-flex justify-content-center align-items-center">
+                          <div>
+                            <img src="/chart.JPG" alt="" className="w-100" />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -117,12 +115,10 @@ export const Home = () => {
                           <FontAwesomeIcon icon={faChartBar} className="me-1" />
                           Bar Chart Example
                         </div>
-                        <div className="card-body">
-                          <canvas
-                            id="myBarChart"
-                            width="100%"
-                            height="40"
-                          ></canvas>
+                        <div className="card-body d-flex justify-content-center align-items-center">
+                          <div>
+                            <img src="/pieChart.JPG" alt="" />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -130,7 +126,7 @@ export const Home = () => {
                   <div className="card mb-4">
                     <div className="card-header">
                       <FontAwesomeIcon icon={faTable} className="me-1" />
-                      DataTable Example
+                      Products Table
                     </div>
                     <div className="card-body">
                       <DataTable />
