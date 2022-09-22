@@ -1,6 +1,9 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
+import InputGroup from "react-bootstrap/InputGroup";
+import Row from "react-bootstrap/Row";
 import { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -16,6 +19,7 @@ export const CreateProduct = () => {
   const [stock, setStock] = useState("");
   const [featured, setFeatured] = useState("");
   const [images, setImages] = useState("");
+  const [validated, setValidated] = useState(false);
   const navigate = useNavigate();
   const admin = useSelector((state) => state.login.token);
   const MySwal = withReactContent(Swal);
@@ -55,80 +59,92 @@ export const CreateProduct = () => {
         Authorization: `Bearer ${admin.token}`,
       },
     });
+    alertCreate();
     navigate("/admin");
     return response;
+  };
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
   };
 
   return (
     <div className="d-flex justify-content-center align-items-center">
       <Form
         className="my-5 border rounded p-5 col-8"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={handleSubmit}
+        noValidate
+        validated={validated}
       >
         <div className="d-flex justify-content-between">
           <div className="col-5">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="validationCustom01">
               <Form.Label>Product name</Form.Label>
               <Form.Control
+                required
                 onChange={(e) => setProductName(e.target.value)}
                 type="text"
                 placeholder="Product name"
-                required
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" controlId="validationCustom02">
               <Form.Label>Description</Form.Label>
               <Form.Control
+                required
                 onChange={(e) => setDescription(e.target.value)}
                 type="text"
                 placeholder="Descripción"
-                required
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Category</Form.Label>
               <Form.Select
+                required
                 aria-label="Default select example"
                 onChange={(e) => setCategory(e.target.value)}
-                required
               >
-                <option>Select a category...</option>
+                <option></option>
                 <option value="1">Inside</option>
                 <option value="2">Outside</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" controlId="validationCustom02">
               <Form.Label>Price</Form.Label>
               <Form.Control
+                required
                 onChange={(e) => setPrice(e.target.value)}
                 type="number"
                 placeholder="Precio"
-                required
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" controlId="validationCustom02">
               <Form.Label>Stock</Form.Label>
               <Form.Control
+                required
                 onChange={(e) => setStock(e.target.value)}
                 type="number"
                 placeholder="Stock"
-                required
               />
             </Form.Group>
-            <Form.Group className="mb-3">
+            <Form.Group className="mb-3" controlId="validationCustom02">
               <Form.Label>Featured</Form.Label>
               <Form.Select
+                required
                 aria-label="Default select example"
                 onChange={(e) => setFeatured(e.target.value)}
-                required
               >
-                <option>Select</option>
+                <option></option>
                 <option value={true}>True</option>
                 <option value={false}>False</option>
               </Form.Select>
             </Form.Group>
           </div>
-
           <div className="col-5">
             <Form.Group className="mb-3">
               <Form.Label>Image 1</Form.Label>
@@ -139,7 +155,6 @@ export const CreateProduct = () => {
                 }}
                 type="file"
                 placeholder="Imágenes"
-                required
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -151,7 +166,6 @@ export const CreateProduct = () => {
                 }}
                 type="file"
                 placeholder="Imágenes"
-                required
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -163,7 +177,6 @@ export const CreateProduct = () => {
                 }}
                 type="file"
                 placeholder="Imágenes"
-                required
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -175,7 +188,6 @@ export const CreateProduct = () => {
                 }}
                 type="file"
                 placeholder="Imágenes"
-                required
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -187,7 +199,6 @@ export const CreateProduct = () => {
                 }}
                 type="file"
                 placeholder="Imágenes"
-                required
               />
             </Form.Group>
           </div>
@@ -195,7 +206,7 @@ export const CreateProduct = () => {
         <Button
           variant="primary"
           type="submit"
-          onClick={() => {
+          onClick={(e) => {
             if (
               !productName ||
               !description ||
@@ -206,12 +217,12 @@ export const CreateProduct = () => {
             ) {
               inputRequired();
             } else {
+              e.preventDefault();
               createProduct();
-              alertCreate();
             }
           }}
         >
-          <button className="submitUpdate">add product</button>
+          add product
         </Button>
       </Form>
     </div>
