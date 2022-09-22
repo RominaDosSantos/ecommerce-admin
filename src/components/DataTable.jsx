@@ -91,7 +91,7 @@ export const DataTable = () => {
       <div className="d-flex justify-content-between">
         <div className="d-flex mb-3">
           <Link to="/create" className="btn btn-success">
-            Agregar
+            Add
           </Link>
         </div>
         <div className="">

@@ -17,7 +17,7 @@ export const NavbarAdmin = () => {
   return (
     <>
       <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <Link className="navbar-brand ps-3" to="">
+        <Link className="navbar-brand ps-3" to="/admin">
           HackShop
         </Link>
         <div

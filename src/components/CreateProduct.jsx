@@ -203,27 +203,32 @@ export const CreateProduct = () => {
             </Form.Group>
           </div>
         </div>
-        <Button
-          variant="primary"
-          type="submit"
-          onClick={(e) => {
-            if (
-              !productName ||
-              !description ||
-              !category ||
-              !price ||
-              !stock ||
-              !featured
-            ) {
-              inputRequired();
-            } else {
-              e.preventDefault();
-              createProduct();
-            }
-          }}
-        >
-          add product
-        </Button>
+        <div className="d-flex justify-content-between">
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={(e) => {
+              if (
+                !productName ||
+                !description ||
+                !category ||
+                !price ||
+                !stock ||
+                !featured
+              ) {
+                inputRequired();
+              } else {
+                e.preventDefault();
+                createProduct();
+              }
+            }}
+          >
+            add product
+          </Button>
+          <Link to="/admin" className="btn btn-primary">
+            Back
+          </Link>
+        </div>
       </Form>
     </div>
   );
