@@ -12,6 +12,7 @@ import withReactContent from "sweetalert2-react-content";
 export const DataTable = () => {
   const [products, setProducts] = useState([]);
   const [refresh, setRefresh] = useState(true);
+  const [tidy, setTidy] = useState("");
   const MySwal = withReactContent(Swal);
 
   const admin = useSelector((state) => state.login.token);
@@ -28,6 +29,15 @@ export const DataTable = () => {
     };
     getProducts();
   }, [refresh]);
+
+  function orden(a, b) {
+    if (tidy === "1") {
+      return a.id - b.id;
+    } else {
+      return b.id - a.id;
+    }
+  }
+  const orderedProducts = products.sort(orden);
 
   const deleteProduct = async (id) => {
     await alertDelete();
@@ -83,7 +93,16 @@ export const DataTable = () => {
           Agregar
         </Link>
       </div>
-
+      <div>
+        <label htmlFor="">ORDEN</label>
+        <select name="" id="" onChange={(e) => setTidy(e.target.value)}>
+          <option value="" selected disabled hidden>
+            Select order..
+          </option>
+          <option value="1">ASC</option>
+          <option value="2">DESC</option>
+        </select>
+      </div>
       <Table striped bordered id="datatablesSimple">
         <thead>
           <tr>
