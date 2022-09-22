@@ -13,8 +13,6 @@ import { SideNavbar } from "./SideNavbar";
 import { useSelector } from "react-redux";
 
 export const Home = () => {
-  const admin = useSelector((state) => state.login.token.email);
-  console.log(admin);
   return (
     <>
       <div className="row">
