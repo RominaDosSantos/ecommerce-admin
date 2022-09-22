@@ -13,13 +13,16 @@ import { ProductDetail } from "./components/ProductDetail";
 import { CreateProduct } from "./components/CreateProduct";
 import ProtectedRoute from "./components/PrivateRoutes.jsx";
 import { Chart } from "./components/Chart";
+import ProtectedLogin from "./components/ProtectedLogin";
 
 function App() {
   return (
     <div className="App ">
       <TopNavbar />
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route element={<ProtectedLogin />}>
+          <Route path="/" element={<Login />} />
+        </Route>
         <Route element={<ProtectedRoute />}>
           <Route path="/admin" element={<Home />} />
           <Route path="/chart" element={<Chart />} />

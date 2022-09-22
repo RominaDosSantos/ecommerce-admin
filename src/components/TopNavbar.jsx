@@ -1,21 +1,30 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import Overlay from "react-bootstrap/Overlay";
 import Popover from "react-bootstrap/Popover";
 import Button from "react-bootstrap/Button";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../redux/config/slices/loginSlice";
 
 export const TopNavbar = () => {
   const [show, setShow] = useState(false);
   const [target, setTarget] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const ref = useRef(null);
 
   const handleClick = (event) => {
     setShow(!show);
     setTarget(event.target);
   };
+
+  async function handlerLogout() {
+    dispatch(logoutUser());
+    navigate("/");
+  }
 
   return (
     <div className="col-12">
@@ -46,9 +55,14 @@ export const TopNavbar = () => {
             containerPadding={20}
           >
             <Popover id="popover-contained">
-              <Link to="/" className="m-3">
+              <button
+                className="m-3"
+                onClick={() => {
+                  handlerLogout();
+                }}
+              >
                 Logout
-              </Link>
+              </button>
             </Popover>
           </Overlay>
         </div>
