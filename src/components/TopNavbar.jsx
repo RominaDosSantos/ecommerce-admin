@@ -34,9 +34,8 @@ export const TopNavbar = () => {
         HackShop
       </Link>
       <button
-        className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+        className="btn btn-link btn-sm order-1 me-4 d-lg-none"
         id="sidebarToggle"
-        // href="#!"
       >
         <FontAwesomeIcon icon={faBars} className="fa-inverse" />
       </button>
