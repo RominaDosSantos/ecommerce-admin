@@ -205,7 +205,7 @@ export const CreateProduct = () => {
         </div>
         <div className="d-flex justify-content-between">
           <Button
-            variant="primary"
+            variant="success"
             type="submit"
             onClick={(e) => {
               if (
@@ -223,7 +223,7 @@ export const CreateProduct = () => {
               }
             }}
           >
-            add product
+            Add product
           </Button>
           <Link to="/admin" className="btn btn-primary">
             Back

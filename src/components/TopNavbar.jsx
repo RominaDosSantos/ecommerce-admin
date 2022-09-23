@@ -1,13 +1,14 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
-import Overlay from "react-bootstrap/Overlay";
 import Popover from "react-bootstrap/Popover";
 import Button from "react-bootstrap/Button";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/config/slices/loginSlice";
+import { useSelector } from "react-redux";
+import { OverlayTrigger } from "react-bootstrap";
 
 export const TopNavbar = () => {
   const [show, setShow] = useState(false);
@@ -15,6 +16,7 @@ export const TopNavbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const ref = useRef(null);
+  const admin = useSelector((state) => state.login.token);
 
   const handleClick = (event) => {
     setShow(!show);
@@ -27,46 +29,52 @@ export const TopNavbar = () => {
   }
 
   return (
-    <div className="col-12">
-      <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <Link className="navbar-brand ps-3" to="">
-          HackShop
-        </Link>
-        <div
-          ref={ref}
-          style={{
-            width: "100%",
-            textAlign: "-webkit-right",
-            paddingRight: "20px",
-          }}
-        >
-          <Button
-            className="btn dropdown-toggle ht-btn"
-            id="btnProfileIcon"
-            onClick={handleClick}
-          >
-            <FontAwesomeIcon icon={faUser} className="fa-inverse" />
-          </Button>
-          <Overlay
-            show={show}
-            target={target}
-            placement="bottom"
-            container={ref}
-            containerPadding={20}
-          >
-            <Popover id="popover-contained">
-              <button
-                className="m-3"
+    <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+      <Link className="navbar-brand ps-3" to="/">
+        HackShop
+      </Link>
+      <button
+        className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0"
+        id="sidebarToggle"
+        // href="#!"
+      >
+        <FontAwesomeIcon icon={faBars} className="fa-inverse" />
+      </button>
+      <div
+        ref={ref}
+        style={{
+          width: "100%",
+          textAlign: "-webkit-right",
+          paddingRight: "20px",
+        }}
+      >
+        <OverlayTrigger
+          trigger="click"
+          placement="bottom"
+          rootClose
+          overlay={
+            <Popover id={`popover-positioned-bottom`}>
+              <Link className="dropdown-item" to="/">
+                <span className="fw-bold">{admin?.email}</span>
+              </Link>
+              <Link
+                to="/"
+                className="dropdown-item"
                 onClick={() => {
                   handlerLogout();
+                  handleClick();
                 }}
               >
                 Logout
-              </button>
+              </Link>
             </Popover>
-          </Overlay>
-        </div>
-      </nav>
-    </div>
+          }
+        >
+          <Button className="btn dropdown-toggle ht-btn" id="btnProfileIcon">
+            <FontAwesomeIcon icon={faUser} className="fa-inverse" />
+          </Button>
+        </OverlayTrigger>
+      </div>
+    </nav>
   );
 };

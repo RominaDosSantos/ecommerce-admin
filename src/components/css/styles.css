@@ -83,6 +83,15 @@
   }
 }
 
+.dashboard-chart {
+  height: 180px;
+}
+
+.btn-login a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -2184,6 +2193,11 @@ progress {
   .table-responsive-sm {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  .table-actions button {
+    margin-top: 5px;
+    margin-left: 0 !important;
   }
 }
 @media (max-width: 767.98px) {

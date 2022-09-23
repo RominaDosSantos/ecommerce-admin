@@ -103,7 +103,7 @@ export const DataTable = () => {
           </Form.Group>
         </div>
       </div>
-      <Table striped bordered id="datatablesSimple">
+      <Table striped bordered id="datatablesSimple" responsive="sm">
         <thead>
           <tr>
             <th>id</th>
@@ -123,7 +123,7 @@ export const DataTable = () => {
                 <td>{product.description.slice(0, 100) + "..."}</td>
                 <td>{product.price}</td>
                 <td>{product.stock}</td>
-                <td className="d-flex">
+                <td className="d-sm-flex table-actions">
                   <Link
                     to={`/product/${product.slug}`}
                     className="btn btn-outline-secondary rounded-pill"

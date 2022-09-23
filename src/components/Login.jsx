@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
 import { login } from "../redux/config/slices/loginSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
   const [email, setEmail] = useState("admin@admin.com");
@@ -23,6 +23,7 @@ export const Login = () => {
     dispatch(
       login({
         token: response.data.token,
+        email: email,
       })
     );
     navigate("/admin");
@@ -53,7 +54,7 @@ export const Login = () => {
                           defaultValue={email}
                           onChange={(e) => setEmail(e.target.value)}
                         />
-                        <label forHtml="inputEmail">Email address</label>
+                        <label>Email address</label>
                       </div>
                       <div className="form-floating mb-3">
                         <input
@@ -65,7 +66,7 @@ export const Login = () => {
                           defaultValue={password}
                           onChange={(e) => setPassword(e.target.value)}
                         />
-                        <label forHtml="inputPassword">Password</label>
+                        <label>Password</label>
                       </div>
                       <div className="form-check mb-3">
                         <input
@@ -74,14 +75,14 @@ export const Login = () => {
                           type="checkbox"
                           value=""
                         />
-                        <label
-                          className="form-check-label"
-                          forHtml="inputRememberPassword"
-                        >
+                        <label className="form-check-label">
                           Remember Password
                         </label>
                       </div>
-                      <button type="submit" className="btn btn-primary">
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-login"
+                      >
                         <Link
                           onClick={() => loginAdmin()}
                           className="submitUpdate"
