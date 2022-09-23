@@ -395,19 +395,24 @@ export const ProductDetail = () => {
             )}
           </div>
         </div>
-        <Button
-          variant="primary"
-          type="submit"
-          onClick={() => {
-            editProduct();
-            alerUpdate();
-          }}
-        >
-          <Link to="/admin" className="submitUpdate">
-            {" "}
-            Submit
+        <div className="d-flex justify-content-between">
+          <Button
+            variant="success"
+            type="submit"
+            onClick={() => {
+              editProduct();
+              alerUpdate();
+            }}
+          >
+            <Link to="/admin" className="submitUpdate">
+              {" "}
+              Submit
+            </Link>
+          </Button>
+          <Link to="/admin" className="btn btn-primary">
+            Back
           </Link>
-        </Button>
+        </div>
       </Form>
     </div>
   );
